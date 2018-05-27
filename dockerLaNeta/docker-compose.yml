@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  api:
+    build: php7
+    volumes:
+      - ..:/var/www
+    ports:
+      - "3000:80"
+    depends_on:
+      - db
+      - redis
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+  redis:
+    image: redis
+    restart: always
